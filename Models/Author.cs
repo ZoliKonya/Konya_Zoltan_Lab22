@@ -12,8 +12,14 @@ namespace Konya_Zoltan_Lab22.Models
         [Display(Name = "LastName")]
         public string? LastName { get; set; }
 
-        [Display(Name = "Author")]
-        public string AuthorName => $"{LastName}, {FirstName}";
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
 
         public ICollection<Book>? Books { get; set; }
     }
