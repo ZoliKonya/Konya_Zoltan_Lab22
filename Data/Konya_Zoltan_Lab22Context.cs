@@ -21,5 +21,9 @@ namespace Konya_Zoltan_Lab22.Data
         public DbSet<Konya_Zoltan_Lab22.Models.Author>? Author { get; set; }
 
         public DbSet<Konya_Zoltan_Lab22.Models.Category>? Category { get; set; }
+
+        public DbSet<Konya_Zoltan_Lab22.Models.Member>? Member { get; set; }
+
+        public DbSet<Konya_Zoltan_Lab22.Models.Borrowing>? Borrowing { get; set; }
     }
 }

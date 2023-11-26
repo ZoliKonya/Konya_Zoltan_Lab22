@@ -52,6 +52,9 @@ namespace Konya_Zoltan_Lab22.Migrations
                     b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BorrowingID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6,2)");
 
@@ -68,6 +71,8 @@ namespace Konya_Zoltan_Lab22.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorID");
+
+                    b.HasIndex("BorrowingID");
 
                     b.HasIndex("PublisherID");
 
@@ -97,6 +102,32 @@ namespace Konya_Zoltan_Lab22.Migrations
                     b.ToTable("BookCategory");
                 });
 
+            modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Borrowing", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MemberID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("BookID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("Borrowing");
+                });
+
             modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Category", b =>
                 {
                     b.Property<int>("ID")
@@ -112,6 +143,35 @@ namespace Konya_Zoltan_Lab22.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Member", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Publisher", b =>
@@ -137,11 +197,17 @@ namespace Konya_Zoltan_Lab22.Migrations
                         .WithMany("Books")
                         .HasForeignKey("AuthorID");
 
+                    b.HasOne("Konya_Zoltan_Lab22.Models.Borrowing", "Borrowing")
+                        .WithMany()
+                        .HasForeignKey("BorrowingID");
+
                     b.HasOne("Konya_Zoltan_Lab22.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
 
                     b.Navigation("Author");
+
+                    b.Navigation("Borrowing");
 
                     b.Navigation("Publisher");
                 });
@@ -165,6 +231,21 @@ namespace Konya_Zoltan_Lab22.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Borrowing", b =>
+                {
+                    b.HasOne("Konya_Zoltan_Lab22.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookID");
+
+                    b.HasOne("Konya_Zoltan_Lab22.Models.Member", "Member")
+                        .WithMany("Borrowings")
+                        .HasForeignKey("MemberID");
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Author", b =>
                 {
                     b.Navigation("Books");
@@ -178,6 +259,11 @@ namespace Konya_Zoltan_Lab22.Migrations
             modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Category", b =>
                 {
                     b.Navigation("BookCategories");
+                });
+
+            modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Member", b =>
+                {
+                    b.Navigation("Borrowings");
                 });
 
             modelBuilder.Entity("Konya_Zoltan_Lab22.Models.Publisher", b =>

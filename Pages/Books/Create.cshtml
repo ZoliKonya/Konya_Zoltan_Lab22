@@ -20,7 +20,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Book.AuthorID" class="control-label">Author Name</label>
-                <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorID">
+                <select asp-for="Book.AuthorID" class="form-control" asp-items="@(new SelectList(ViewBag.AuthorID, "Value", "Text"))">
+                    <option value="">Select Author</option>
                 </select>
                 <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
             </div>
@@ -32,15 +33,16 @@
             <div class="form-group">
                 <label asp-for="Book.PublishingDate" class="control-label"></label>
                 <input asp-for="Book.PublishingDate" class="form-control" />
-                <span asp-validation-for="Book.PublishingDate" class="textdanger"></span>
+                <span asp-validation-for="Book.PublishingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Book.PublisherID" class="control-label">Publisher Name</label>
-                <select asp-for="Book.PublisherID" class="form-control" asp-items="ViewBag.PublisherID">
+                <select asp-for="Book.PublisherID" class="form-control" asp-items="@(new SelectList(ViewBag.PublisherID, "Value", "Text"))">
+                    <option value="">Select Publisher</option>
                 </select>
                 <span asp-validation-for="Book.PublisherID" class="text-danger"></span>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <div class="table">
                     <table>
                         <tr>
@@ -50,7 +52,7 @@
                                 {
                                     if (cnt++ % 3 == 0)
                                     {
-                                    @:</tr><tr>
+                                        @:</tr><tr>
                                     }
                                     @:<td>
                                         <input type="checkbox"
@@ -61,10 +63,10 @@
                                     @:</td>
                                 }
                             @:</tr>
-                            }
-                        </table>
-                    </div>
+                        }
+                    </table>
                 </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
