@@ -11,7 +11,9 @@ namespace Konya_Zoltan_Lab22.Models
         [Display(Name = "Book Title")]
         public string Title { get; set; }
 
+        [ForeignKey("AuthorID")] 
         public int? AuthorID { get; set; }
+
         public Author? Author { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
