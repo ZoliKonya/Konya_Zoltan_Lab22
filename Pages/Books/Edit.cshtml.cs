@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Konya_Zoltan_Lab22.Data;
 using Konya_Zoltan_Lab22.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Konya_Zoltan_Lab22.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : BookCategoriesPageModel
     {
         private readonly Konya_Zoltan_Lab22.Data.Konya_Zoltan_Lab22Context _context;

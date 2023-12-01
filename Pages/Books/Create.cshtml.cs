@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Konya_Zoltan_Lab22.Data;
 using Konya_Zoltan_Lab22.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Konya_Zoltan_Lab22.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : BookCategoriesPageModel
     {
         private readonly Konya_Zoltan_Lab22.Data.Konya_Zoltan_Lab22Context _context;

@@ -10,6 +10,8 @@ namespace Konya_Zoltan_Lab22.Models
         public int ID { get; set; }
 
         [Display(Name = "Book Title")]
+        [Required(ErrorMessage = "titlul cartii este completat obiligatoriu")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "lungimea maxima pentru titlu sa fie de 150 de caractere si o lungime minima de 3 caractere")]
         public string Title { get; set; }
 
         [ForeignKey("AuthorID")] 
@@ -18,6 +20,7 @@ namespace Konya_Zoltan_Lab22.Models
         public Author? Author { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
+        [Range(0.01, 500)]
         public decimal Price { get; set; }
 
         [DataType(DataType.Date)]
